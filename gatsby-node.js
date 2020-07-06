@@ -42,10 +42,12 @@ exports.sourceNodes = async ({ actions, cache, store }, configOptions) => {
 
   for (let path in assets) {
     const assetNode = await fileNodeFactory.createAssetNode(path);
-    assets[path] = {
-      localPath: copyFileToStaticFolder(assetNode),
-      id: assetNode.id
-    };
+    if(assetNode){
+      assets[path] = {
+        localPath: copyFileToStaticFolder(assetNode),
+        id: assetNode.id
+      };
+    }
   }
 
   for (let markdown in markdowns) {
